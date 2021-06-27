@@ -12,7 +12,6 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <!-- 追加 -->
         <th>時間</th>
         <% date_range.slice(0, 7).each do |day| %>
           <th><%= t('date.abbr_day_names')[day.wday] %></th>
@@ -33,23 +32,24 @@
             <% end %>
           <% end %>
         </tr>
-        <!-- 追加 -->
-        <!-- ここから -->
         <% times.each do |time| %>
           <tr>
             <td><%= time %></td>
             <% week.each do |day| %>
               <td>
-              <% if check_reservation(reservations, day, time) %>
-                <%= '×' %>
-              <% else %>
-                <%= '○' %>
-              <% end %>
+                <% if check_reservation(reservations, day, time) %>
+                  <%= '×' %>
+                <% else %>
+                  <!-- 追加 -->
+                  <%= link_to new_reservation_path(day: day, time: time) do %>
+                    <%= '○' %>
+                  <% end %>
+                  <!-- ここまで -->
+                <% end %>
               </td>
             <% end %>
           </tr>
         <% end %>
-        <!-- ここまで -->
       <% end %>
     </tbody>
   </table>
