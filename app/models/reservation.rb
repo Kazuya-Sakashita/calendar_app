@@ -1,4 +1,6 @@
 class Reservation < ApplicationRecord
+  belongs_to :user
+  
   validate :date_before_start
   validate :date_current_today
   validate :date_three_month_end
